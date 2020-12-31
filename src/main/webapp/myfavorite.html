@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>黑马旅游网-我的收藏</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="css/common.css">
+        <link rel="stylesheet" href="css/index.css">
+       <style>
+           .tab-content .row>div {
+            margin-top: 16px;
+           } 
+           .tab-content {
+            margin-bottom: 36px;
+           }
+           .btn-danger{
+               position: relative;
+               top: -43px;
+               left: 198px;
+           }
+
+       </style>
+       <script src="js/jquery-3.3.1.js"></script>
+       <script>
+           function fun(data){
+               // alert($(data).parent().find("a").find("div.has_border").find("h3").html());
+               //1.设置被点击了删除按钮的对象的样式设置消失
+               $(data).parent().css("display","none");
+               //2.取出a标签中的路径
+               var ridStr=$(data).parent().find("a").attr("href")
+               //3.分离出路径中的rid传输到后台进行数据库删除收藏线路
+               var rid = ridStr.split("=")[1];
+               //4.使用异步传输
+               $.post("Route/removeRoute",{rid:rid},function () {
+
+               });
+
+           }
+           $(function () {
+               $.post("User/findOne",{},function (user) {
+                   if(user){
+                       $.post("Route/myCollection",{uid:user.uid},function (routes) {
+                           var divs='';
+                           for (let i = 0; i < routes.length; i++) {
+                               divs+='<div class="col-md-3">\n' +
+                                   '      <a href="route_detail.html?rid='+routes[i].rid+'">\n' +
+                                   '          <img src="'+routes[i].rimage+'" alt="">\n' +
+                                   '          <div class="has_border">\n' +
+                                   '              <h3>'+routes[i].rname+'</h3>\n' +
+                                   '              <div class="price">网付价<em>￥</em><strong>'+routes[i].price+'</strong><em>起</em></div>\n' +
+                                   '          </div>\n' +
+                                   '      </a>\n' +
+                                   '     <button style="float: left" class="btn btn-danger" onclick="fun(this)">删除</button>'+
+                                   '  </div>'
+                           }
+                           $("#myFavorite").html(divs);
+                       })
+                   }
+               })
+           })
+       </script>
+    </head>
+    <body>
+    <!--引入头部-->
+    <div id="header"></div>
+         <!-- 排行榜 start-->
+        <section id="content">            
+            <section class="hemai_jx">
+                <div class="jx_top">
+                    <div class="jx_tit">
+                        <img src="images/icon_5.jpg" alt="">
+                        <span>我的收藏</span>
+                    </div>                    
+                </div>
+                <div class="jx_content">
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="home">
+                            <div class="row" id="myFavorite">
+                            </div>
+                        </div>                       
+                    </div>
+                </div>
+            </section>                      
+        </section>
+        <!-- 排行榜 end-->
+    	
+         <!--引入尾部-->
+    	<div id="footer"></div>
+        <!--导入布局js，共享header和footer-->
+        <script type="text/javascript" src="js/include.js"></script>
+    </body>
+</html>
