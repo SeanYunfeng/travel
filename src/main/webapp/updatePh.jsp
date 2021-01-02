@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="javax.lang.model.element.VariableElement" %>
-<%@ page import="cn.itcast.travel.domain.User" %>
+<%@ page import="cn.yunfeng.travel.domain.User" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -78,7 +78,7 @@
                     <div class="table_style" style="margin-left: 150px;">
                         <div class="uploade">
                             <div align="center">
-                                <img style="width: 200px;height: 200px" src=""  class="img-circle" id="uploadImg"/>
+                                <img style="width: 200px;height: 200px" src="img/userImg/${sessionScope.User.uimage}"  class="img-circle" id="uploadImg"/>
                                 <p>&nbsp;</p>
                                 <input class="uploadFile" name="headShot" id="headShot" type="file" value="上传照片">
                             </div>

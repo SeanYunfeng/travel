@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context.xsd">
+        <context:property-placeholder location="classpath:druid.properties"/>
+        <!--注解的组件扫描-->
+        <context:component-scan base-package="cn.yunfeng.travel"></context:component-scan>
+<!--        关于数据库方面-->
+        <beans>
+<!--            配置数据源druid-->
+            <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+                <property name="driverClassName" value="${driverClassName}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="root"/>
+                <property name="password" value="${password}"/>
+                <property name="maxActive" value="${maxActive}"></property>
+                <property name="maxWait" value="${maxWait}"></property>
+                <property name="initialSize" value="${initialSize}"></property>
+            </bean>
+            <!--jdbc模板对象-->
+            <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+                <property name="dataSource" ref="dataSource"/>
+            </bean>
+        </beans>
+<!--    Dao层-->
+        <beans>
+<!--            Dao层-->
+            <bean id="userDaoImpl" class="cn.yunfeng.travel.dao.impl.UserDaoImpl"></bean>
+            <bean id="SellerDaoImpl" class="cn.yunfeng.travel.dao.impl.SellerDaoImpl"></bean>
+            <bean id="RouteDaoImpl" class="cn.yunfeng.travel.dao.impl.RouteDaoImpl"></bean>
+            <bean id="RouteImgDaoImpl" class="cn.yunfeng.travel.dao.impl.RouteImgDaoImpl"></bean>
+            <bean id="FavoriteDaoImpl" class="cn.yunfeng.travel.dao.impl.FavoriteDaoImpl"></bean>
+            <bean id="CategoryDaoImpl" class="cn.yunfeng.travel.dao.impl.CategoryImpl"></bean>
+<!--            service层-->
+            <bean id="userServiceImpl" class="cn.yunfeng.travel.service.impl.UserServiceImpl"></bean>
+            <bean id="FavoriteServiceImpl" class="cn.yunfeng.travel.service.impl.FavoriteServiceImpl"></bean>
+            <bean id="RouteServiceImpl" class="cn.yunfeng.travel.service.impl.RouteServiceImpl"></bean>
+            <bean id="UserServiceImpl" class="cn.yunfeng.travel.service.impl.UserServiceImpl"></bean>
+        </beans>
+
+
+</beans>

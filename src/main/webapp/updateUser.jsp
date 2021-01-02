@@ -1,3 +1,10 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: 云峰
+  Date: 2020/12/31
+  Time: 17:10
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page import="javax.lang.model.element.VariableElement" %>
 <%@ page import="cn.yunfeng.travel.domain.User" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -23,7 +30,7 @@
         .td_right{
             margin-left: 50px;
         }
-        
+
     </style>
     <script>
         //检查用户填写的邮箱格式否标准
@@ -48,15 +55,12 @@
             $("#updatePh").click(function () {
                 location="updatePh.jsp";
             });
-            $("#updateInfo").click(function () {
-               location="updateUser.jsp";
-            });
         })
         //失去焦点时调用检测方法
         $("#email").blur(checkEmail);
 
     </script>
-    
+
 </head>
 <body>
 <!--引入头部-->
@@ -75,21 +79,7 @@
                 <!--提交处理请求的标识符-->
                 <input type="hidden" name="action" value="register">
                 <table style="margin-top: 100px;" >
-                    <tr>
-                        <td class="td_left">
-                            <label> 用户头像:&emsp;&emsp; </label>
-                        </td>
-                        <td class="td_right" >
-                            <c:choose>
-                                <c:when test="${empty User.uimage}">
-                                    <img  src="images/jiangxuan_5.jpg"  class="img-circle">
-                                </c:when>
-                                <c:when test="${not empty User.uimage}">
-                                    <img src="img/userImg/${User.uimage}" class="img-circle" />
-                                </c:when>
-                            </c:choose>
-                        </td>
-                    </tr>
+
                     <tr>
                         <td class="td_left">
                             <label for="username">用户名:&emsp;&emsp; </label>
@@ -144,10 +134,7 @@
                     <tr>
 
                         <td class="td_right check" style="margin-left: 10px">
-                            <input type="button" class="btn btn-warning"  id="updateInfo"value="修改信息">
-                        </td>
-                        <td class="td_right check">
-                            <input type="button" class="btn btn-warning" id="updatePh" value="上传头像">
+                            <input type="submit" class="btn btn-warning"  value="保存">
                         </td>
                     </tr>
                 </table>
